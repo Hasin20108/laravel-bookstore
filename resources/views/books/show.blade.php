@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('page-content')
-<h1>{{$books->tittle}}</h1>
+<h1>{{$books->title}}</h1>
 <table class="table table-striped table-bordered">
     <tr>
         <th>ID</th>

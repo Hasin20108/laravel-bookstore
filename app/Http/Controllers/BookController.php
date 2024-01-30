@@ -26,4 +26,27 @@ class BookController extends Controller
         // echo 'book_id = '. $book_id;
         return view('books.create');
     }
+    public function store(Request $request){
+        // echo 'book_id = '. $book_id;
+        // return view('books.create');
+        $rules = [
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'isbn' => 'required|numeric|digits:13',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0',
+        ];
+        $this->validate($request,$rules);
+
+        $book= new Book();
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->isbn = $request->isbn;
+        $book->price = $request->price;
+        $book->stock = $request->stock;
+        $book->save();
+
+        
+        return redirect()->route('books.show',$book->id);
+    }
 }
