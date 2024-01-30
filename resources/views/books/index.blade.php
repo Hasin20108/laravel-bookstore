@@ -15,7 +15,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Price</th>
-            <th colspan="2" >Action</th>
+            <th colspan="3" >Action</th>
         </tr>
         @foreach ($books as $book)
             <tr>
@@ -25,6 +25,13 @@
                 <td>{{$book->price}}</td>
                 <td><a href="{{route('books.show',$book->id)}}">View</a></td>
                 <td><a href="{{route('books.edit',$book->id)}}">Edit</a></td>
+                <td>
+                    <form method="post" action="{{route('books.destroy')}}" onsubmit="return confirm('Sure?')">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$book->id}}">
+                        <input type="submit" style="padding:0; margin:0" value="Delete" class="btn btn-link text-danger"/>
+                    </form>
+                </td>
             </tr>
         @endforeach
         
