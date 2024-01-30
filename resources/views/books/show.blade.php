@@ -32,6 +32,7 @@
 </table>
 <p>
     <a class="btn btn-success" href="{{route('books.index')}}"><i class="bi bi-caret-left"></i>Back</a>
+    <a class="btn btn-danger" href="{{route('books.edit',$books->id)}}"><i class="bi bi-pencil-square"></i>Edit</a>
 </p>
 
 @endsection

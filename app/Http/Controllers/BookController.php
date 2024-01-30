@@ -49,4 +49,34 @@ class BookController extends Controller
         
         return redirect()->route('books.show',$book->id);
     }
+
+    public function edit($book_id){ 
+        // echo $book_id;
+        $book = Book::find($book_id);
+        return view('books.edit')->with('book',$book);
+
+    }
+    public function update(Request $request){
+        $rules =[
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'isbn' => 'required|numeric|digits:13',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0'
+        ];
+
+        $this->validate($request,$rules);
+
+        $book =  Book::find($request->id);
+
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->isbn = $request->isbn;
+        $book->price = $request->price;
+        $book->stock = $request->stock;
+
+        $book->save();
+
+        return redirect()->route('books.show', $book->id);
+    }
 }
