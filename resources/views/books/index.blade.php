@@ -3,11 +3,26 @@
 
 @section('page-content')
 <h1>All Books</h1>
-    <div class = "row">
-        <div class="col-lg-12">
-            <p align = "right"><a href="{{route('books.create')}}" class="btn btn-primary">New Book</a></p>
+    <div class="row">
+        <div class="col-lg-10">
+            <form  action="{{ route('books.index') }}" method="GET" >
+                <div class="form-row">
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Search"
+                            value="{{ request('search') }}">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-default">Search</button>
+
+                    </div>
+                </div>
+            </form>
+
         </div>
 
+        <div class="col-lg-2">
+            <p class="text-right"><a href="{{route('books.create')}}" class="btn btn-primary">New Book</a></p>
+        </div>
     </div>
     <table class="table table-striped table-bordered">
         <tr>

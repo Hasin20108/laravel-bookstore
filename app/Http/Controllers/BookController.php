@@ -10,10 +10,14 @@ class BookController extends Controller
     public function welcome(){
         return view('welcome');
     }
-    public function index(){
-        //fetch book data
-        $books = Book::paginate(10);
-        // pass book data to views
+    public function index(Request $request){
+        if($request->has('search')){
+            $books = Book::where('title','like','%'.$request->search.'%')
+            ->orWhere('author','like','%'.$request->search.'%')
+            ->paginate(10);
+        }else{
+            $books = Book::paginate(10);
+        }
         return view('books.index')->with('books',$books);
     }
 
